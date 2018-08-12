@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link>===
       <router-link to="/about">About</router-link>===
       <router-link to="/apitest">apitest</router-link>===
-      <router-link to="/apitest_vueconfig_daili">apitest_vueconfig_daili</router-link>
+      <router-link to="/apitest_vueconfig_daili">apitest_vueconfig_daili</router-link>===
+      <router-link to="/registapitest">registapitest</router-link>
     </div>
     <router-view/>
   </div>
