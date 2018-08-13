@@ -83,7 +83,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .psf-upfile-box{
         background:#ccc;
         display: inline-block;
