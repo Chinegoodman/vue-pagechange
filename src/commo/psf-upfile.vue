@@ -49,16 +49,30 @@ export default {
             .then(function(data){
                 if(data.data.code.retnCode=="AAAAAAA"){
                     // console.log('上传成功')
-                    let imgData={
-                        name:formFile.get('file').name,
-                        sizeB:formFile.get('file').size,
-                        type:formFile.get('file').type,
-                        url:data.data.data.file,
-                        sizeKB:formFile.get('file').size/1024,
-                        sizeMB:formFile.get('file').size/1024/1024,
-                        sizeGB:formFile.get('file').size/1024/1024/1024,
-                    };
+                    // let imgData={
+                    //     name:formFile.get('file').name,
+                    //     sizeB:formFile.get('file').size,
+                    //     type:formFile.get('file').type,
+                    //     url:data.data.data.file,
+                    //     sizeKB:formFile.get('file').size/1024,
+                    //     sizeMB:formFile.get('file').size/1024/1024,
+                    //     sizeGB:formFile.get('file').size/1024/1024/1024,
+                    // };
 
+                    let psfouttofather = {
+                        fileIdName : _this.fileIdName,
+                        fileData:{
+                            url:data.data.data.file,
+                            name : formFile.get('file').name,
+                            type : formFile.get('file').type,
+                            sizeB : formFile.get('file').size,
+                            sizeKB : formFile.get('file').size/1024,
+                            sizeMB : formFile.get('file').size/1024/1024,
+                            sizeGB : formFile.get('file').size/1024/1024/1024
+                        }
+                    }
+                    _this.$emit("getchilddata",psfouttofather)
+                }else if(data.data.message=='上传成功！'){
                     let psfouttofather = {
                         fileIdName : _this.fileIdName,
                         fileData:{

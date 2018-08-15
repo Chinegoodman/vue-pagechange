@@ -24,7 +24,8 @@ export default {
         // application/x-zip-compressed 比如.zip压缩文件
         filetype:'image/png,image/jpeg,image/gif',
         fileIdName:'fileinputWEIYIDEIdName',
-        upfileurl:'http://172.16.21.122/file/upload?accessToken=SID_F609CCFDD8EBA469C1D78A9845202AE4',
+        // upfileurl:'http://172.16.21.122/file/upload?accessToken=SID_F609CCFDD8EBA469C1D78A9845202AE4',公司测试接口
+        upfileurl:'http://www.ooo0o.com/tp5/public/home/index/qiniuUpload',//自己的测试服接口
         upfilesize:1,
       },
       labetext:'请选择要上传的文件',
