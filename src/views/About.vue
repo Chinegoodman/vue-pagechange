@@ -3,14 +3,17 @@
   <div class="about">
     <h1>This is an about page</h1>
     <psf-upfile class="zidingyiclassname" @getchilddata="saveupfiledata" :upfilesize="upfileresetdata.upfilesize" :labetext="labetext" :filetype="upfileresetdata.filetype" :fileIdName="upfileresetdata.fileIdName" :upfileurl="upfileresetdata.upfileurl"></psf-upfile>
+
+    <psf-changepage :pagesallnumber="pagesall_number"></psf-changepage>
   </div>
 </template>
 
 <script>
 import psfUpfile from'./../commo/psf-upfile'
+import psfChangepage from'./../commo/psf-changepage'
 export default {
   components:{
-    psfUpfile
+    psfUpfile,psfChangepage
   },
   data(){
     return{
@@ -29,6 +32,9 @@ export default {
         upfilesize:1,
       },
       labetext:'请选择要上传的文件',
+
+      // 翻页插件
+      pagesall_number:8,
     }
   },
   methods:{
