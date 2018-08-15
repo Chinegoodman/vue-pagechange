@@ -13,9 +13,10 @@ export default {
     props:[
         // filetype文件类型：对输入文件格式做出限制输出时可以做简单区分。   ===父级必须给必须的参数
         // fileIdName文件的ID：用于绑定input方便点击区域获取焦点。         ===父级必须给必须的参数
-        // upfileurl文件上传地址                                        ===父级必须给必须的参数
-        // labetext文件上传label地区显示文本                                        ===父级必须给必须的参数
-        "filetype","fileIdName","upfileurl","labetext"
+        // upfileurl文件上传服务器端接口地址                              ===父级必须给必须的参数
+        // labetext文件上传label地区显示文本                             ===父级必须给必须的参数
+        // upfilesize文件上传大小即文件的最大限制尺寸  单位 "Mb"                   ===父级必须给必须的参数
+        "filetype","fileIdName","upfileurl","labetext","upfilesize"
     ],
     data(){
         return{
@@ -25,6 +26,14 @@ export default {
     methods:{
         filechange:function(e){
             let ele = e.target.files[0];
+            // ======================================此处插入文件大小判断===================================================================
+            if (ele.size > this.upfilesize * 1024 * 1024) {
+                alert('文件尺寸大于'+this.upfilesize+'M，请上传小文件')
+                e.target.value = '';
+                return;
+            }
+            // =====================================================================================================================
+            
             let formFile = new FormData();
             let _this=this;
             formFile.append('file',ele);
@@ -40,15 +49,15 @@ export default {
             .then(function(data){
                 if(data.data.code.retnCode=="AAAAAAA"){
                     // console.log('上传成功')
-                    let imgData={
-                        name:formFile.get('file').name,
-                        sizeB:formFile.get('file').size,
-                        type:formFile.get('file').type,
-                        url:data.data.data.file,
-                        sizeKB:formFile.get('file').size/1024,
-                        sizeMB:formFile.get('file').size/1024/1024,
-                        sizeGB:formFile.get('file').size/1024/1024/1024,
-                    };
+                    // let imgData={
+                    //     name:formFile.get('file').name,
+                    //     sizeB:formFile.get('file').size,
+                    //     type:formFile.get('file').type,
+                    //     url:data.data.data.file,
+                    //     sizeKB:formFile.get('file').size/1024,
+                    //     sizeMB:formFile.get('file').size/1024/1024,
+                    //     sizeGB:formFile.get('file').size/1024/1024/1024,
+                    // };
 
                     let psfouttofather = {
                         fileIdName : _this.fileIdName,
@@ -62,15 +71,20 @@ export default {
                             sizeGB : formFile.get('file').size/1024/1024/1024
                         }
                     }
-                    // psfouttofather.fileIdName = this.fileIdName;
-                    // psfouttofather.fileData.name = formFile.get('file').name;
-                    // psfouttofather.fileData.type = formFile.get('file').type;
-                    // psfouttofather.fileData.url = data.data.data.file;
-                    // psfouttofather.fileData.sizeB = formFile.get('file').size;
-                    // psfouttofather.fileData.sizeKB = formFile.get('file').size/1024;
-                    // psfouttofather.fileData.sizeMB = formFile.get('file').size/1024/1024;
-                    // psfouttofather.fileData.sizeGB = formFile.get('file').size/1024/1024/1024;
-
+                    _this.$emit("getchilddata",psfouttofather)
+                }else if(data.data.message=='上传成功！'){
+                    let psfouttofather = {
+                        fileIdName : _this.fileIdName,
+                        fileData:{
+                            url:data.data.data.file,
+                            name : formFile.get('file').name,
+                            type : formFile.get('file').type,
+                            sizeB : formFile.get('file').size,
+                            sizeKB : formFile.get('file').size/1024,
+                            sizeMB : formFile.get('file').size/1024/1024,
+                            sizeGB : formFile.get('file').size/1024/1024/1024
+                        }
+                    }
                     _this.$emit("getchilddata",psfouttofather)
                 }
             })
@@ -83,7 +97,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .psf-upfile-box{
         background:#ccc;
         display: inline-block;
