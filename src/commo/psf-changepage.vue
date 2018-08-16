@@ -1,7 +1,7 @@
 <template>
     <div class="psf-changepagebox">
         <ul class="psf-changpagecontainer">
-            <li>首页</li>
+            <li @click="gofirstpage">首页</li>
             <li v-if="prependpointstatus">...</li>
             <li @click="changeclick(activepagenumber__4)" v-if="activepagenumber__4!=-1">{{activepagenumber__4}}</li>
             <li @click="changeclick(activepagenumber__3)" v-if="activepagenumber__3!=-1">{{activepagenumber__3}}</li>
@@ -13,7 +13,8 @@
             <li @click="changeclick(activepagenumber_03)" v-if="activepagenumber_03!=-1">{{activepagenumber_03}}</li>
             <li @click="changeclick(activepagenumber_04)" v-if="activepagenumber_04!=-1">{{activepagenumber_04}}</li>
             <li v-if="appendpointstatus">...</li>
-            <li>最后一页</li>
+            <li @click="golastpage">最后一页</li>
+            <div style="clear:both;"></div>
         </ul>
         <div style="clear:both"></div>
         <p>共{{pagesallnumber}}页</p>
@@ -41,9 +42,22 @@
             }
         },
         methods:{
+            gofirstpage(){
+                // console.log(this.activepagenumber)
+                if(this.activepagenumber!=1){
+                    this.changeclick(1)
+                }
+            },
+            golastpage(){
+                // console.log(this.pagesallnumber)
+                if(this.activepagenumber!=this.pagesallnumber){
+                    this.changeclick(this.pagesallnumber)
+                }
+            },
             changeclick(pagenumber){
                 this.activepagenumber=pagenumber;
                 this.resetshow()
+                this.$emit('changenumber',pagenumber)
             },
 
             resetshow(){
@@ -376,6 +390,36 @@
                         this.activepagenumber__2=this.activepagenumber-2;
                         this.activepagenumber__1=this.activepagenumber-1;
                     }
+                    if(this.activepagenumber==this.pagesallnumber-2){
+                        this.activepagenumber_01=this.activepagenumber+1;
+                        this.activepagenumber_02=this.activepagenumber+2;
+                        this.activepagenumber_03=-1;
+                        this.activepagenumber_04=-1;
+                        this.activepagenumber__4=-1;
+                        this.activepagenumber__3=-1;
+                        this.activepagenumber__2=this.activepagenumber-2;
+                        this.activepagenumber__1=this.activepagenumber-1;
+                    }
+                    if(this.activepagenumber==this.pagesallnumber-1){
+                        this.activepagenumber_01=this.activepagenumber+1;
+                        this.activepagenumber_02=-1;
+                        this.activepagenumber_03=-1;
+                        this.activepagenumber_04=-1;
+                        this.activepagenumber__4=-1;
+                        this.activepagenumber__3=this.activepagenumber-4;
+                        this.activepagenumber__2=this.activepagenumber-3;
+                        this.activepagenumber__1=this.activepagenumber-2;
+                    }
+                    if(this.activepagenumber==this.pagesallnumber){
+                        this.activepagenumber_01=-1;
+                        this.activepagenumber_02=-1;
+                        this.activepagenumber_03=-1;
+                        this.activepagenumber_04=-1;
+                        this.activepagenumber__4=this.activepagenumber-4;
+                        this.activepagenumber__3=this.activepagenumber-3;
+                        this.activepagenumber__2=this.activepagenumber-2;
+                        this.activepagenumber__1=this.activepagenumber-1;
+                    }
                     // if(this.activepagenumber==5){
                     //     this.activepagenumber_01=-1;
                     //     this.activepagenumber_02=-1;
@@ -419,8 +463,10 @@
             },
             ifappendpointstatus(){
                 if(this.pagesallnumber<=5){
+                // 总页数少于5隐藏
                     this.appendpointstatus=false;
-                }else if(this.activepagenumber+2>this.pagesallnumber){
+                }else if(this.activepagenumber+3>this.pagesallnumber){
+                // 总页数少于5隐藏
                     this.appendpointstatus=false;
                 }else{
                     this.appendpointstatus=true;
@@ -428,20 +474,26 @@
             },
         },
         mounted() {
-            this.resetshow()
+            this.changeclick(1)
         },
     }
 </script>
 
 <style scoped>
-    ul{
+    /* ul{
         list-style: none;
-    }
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+    } */
     .psf-changepagebox{
         
     }
     .psf-changpagecontainer{
-
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
     }
     .psf-changpagecontainer>li{
         float: left;
@@ -449,6 +501,9 @@
         padding: 5px 10px;
         background-color: #ccc;
         margin-right:5px;
+    }
+    .psf-changpagecontainer>li:last-child{
+        margin-right: 0;
     }
     .psf-changpagecontainer>li.activepagenumberli{
         background-color: #000;

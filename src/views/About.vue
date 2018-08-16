@@ -4,7 +4,7 @@
     <h1>This is an about page</h1>
     <psf-upfile class="zidingyiclassname" @getchilddata="saveupfiledata" :upfilesize="upfileresetdata.upfilesize" :labetext="labetext" :filetype="upfileresetdata.filetype" :fileIdName="upfileresetdata.fileIdName" :upfileurl="upfileresetdata.upfileurl"></psf-upfile>
 
-    <psf-changepage :pagesallnumber="pagesall_number"></psf-changepage>
+    <psf-changepage @changenumber="getchangenumber" :pagesallnumber="pagesall_number"></psf-changepage>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
       labetext:'请选择要上传的文件',
 
       // 翻页插件
-      pagesall_number:8,
+      pagesall_number:18,
     }
   },
   methods:{
@@ -44,11 +44,19 @@ export default {
       // console.log(fileDataObj.fileIdName)
       this.labetext=fileDataObj.fileData.name
     }
+
+
+    ,
+    getchangenumber(pagenumber){
+      // console.log('父级获取到了')
+      console.log(pagenumber)
+    }
   }
 }
 </script>
 
 <style scoped>
+  /* 自定义文件上传组件的自定义样式 */
   .psf-upfile-box{
     width: 800px;
     height: 150px;
@@ -59,4 +67,8 @@ export default {
     height: 350px;
     background: #0ff;
   }
+
+
+  /* 自定义翻页组件的自定义样式 */
+
 </style>
