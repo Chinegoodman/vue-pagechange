@@ -19,3 +19,4 @@ npm run build
 ```
 npm run lint
 ```
+文件上传组件及翻页组件===在about页面中使用。可参考
