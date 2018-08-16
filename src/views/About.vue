@@ -4,7 +4,7 @@
     <h1>This is an about page</h1>
     <psf-upfile class="zidingyiclassname" @getchilddata="saveupfiledata" :upfilesize="upfileresetdata.upfilesize" :labetext="labetext" :filetype="upfileresetdata.filetype" :fileIdName="upfileresetdata.fileIdName" :upfileurl="upfileresetdata.upfileurl"></psf-upfile>
 
-    <psf-changepage @changenumber="getchangenumber" :pagesallnumber="pagesall_number"></psf-changepage>
+    <psf-changepage class="zidingyiclassname2" @changenumber="getchangenumber" :pagesallnumber="pagesall_number"></psf-changepage>
   </div>
 </template>
 
@@ -70,5 +70,7 @@ export default {
 
 
   /* 自定义翻页组件的自定义样式 */
-
+  .zidingyiclassname2{
+    background:green;
+  }
 </style>

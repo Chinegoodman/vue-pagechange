@@ -43,13 +43,11 @@
         },
         methods:{
             gofirstpage(){
-                // console.log(this.activepagenumber)
                 if(this.activepagenumber!=1){
                     this.changeclick(1)
                 }
             },
             golastpage(){
-                // console.log(this.pagesallnumber)
                 if(this.activepagenumber!=this.pagesallnumber){
                     this.changeclick(this.pagesallnumber)
                 }
@@ -420,36 +418,6 @@
                         this.activepagenumber__2=this.activepagenumber-2;
                         this.activepagenumber__1=this.activepagenumber-1;
                     }
-                    // if(this.activepagenumber==5){
-                    //     this.activepagenumber_01=-1;
-                    //     this.activepagenumber_02=-1;
-                    //     this.activepagenumber_03=-1;
-                    //     this.activepagenumber_04=-1;
-                    //     this.activepagenumber__4=1;
-                    //     this.activepagenumber__3=2;
-                    //     this.activepagenumber__2=3;
-                    //     this.activepagenumber__1=4;
-                    // }
-                    // if(this.activepagenumber==6){
-                    //     this.activepagenumber_01=-1;
-                    //     this.activepagenumber_02=-1;
-                    //     this.activepagenumber_03=-1;
-                    //     this.activepagenumber_04=-1;
-                    //     this.activepagenumber__4=2;
-                    //     this.activepagenumber__3=3;
-                    //     this.activepagenumber__2=4;
-                    //     this.activepagenumber__1=5;
-                    // }
-                    // if(this.activepagenumber==7){
-                    //     this.activepagenumber_01=-1;
-                    //     this.activepagenumber_02=-1;
-                    //     this.activepagenumber_03=-1;
-                    //     this.activepagenumber_04=-1;
-                    //     this.activepagenumber__4=3;
-                    //     this.activepagenumber__3=4;
-                    //     this.activepagenumber__2=5;
-                    //     this.activepagenumber__1=6;
-                    // }
                 }
             },
             ifprependpoint(){
@@ -480,12 +448,6 @@
 </script>
 
 <style scoped>
-    /* ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: inline-block;
-    } */
     .psf-changepagebox{
         
     }
